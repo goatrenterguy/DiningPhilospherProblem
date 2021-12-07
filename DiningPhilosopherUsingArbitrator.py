@@ -22,18 +22,19 @@ class Philosopher(threading.Thread):
             time.sleep(random.random())
             # Gets hungry
             #print("Philosopher " + str(self.index) + " is hungry")
-            self.waiter.request(self)
+            ate = self.waiter.request(self)
+
         print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "ms hungry")
 
 
     def dine(self):
         print("Philosopher " + str(self.index) + " is eating")
-        wait = random.random()
-        self.hungryTime += wait
-        time.sleep(wait)
 
     def wait(self):
         print("The waiter is busy, philosopher " + str(self.index) + " will eat when the waiter is ready.")
+        wait = random.random()
+        self.hungryTime += wait
+        time.sleep(wait)
 
 class Waiter:
     def __init__(self):
