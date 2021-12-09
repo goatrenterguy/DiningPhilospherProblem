@@ -24,7 +24,7 @@ class Philosopher(threading.Thread):
             if self.prints:
                 print("Philosopher " + str(self.index) + " is hungry")
             self.dine()
-        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "ms hungry")
+        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "m hungry")
 
     def dine(self):
         # Check larger fork

@@ -22,16 +22,16 @@ class Philosopher(threading.Thread):
             if self.prints:
                 print("Philosopher " + str(self.index) + " is hungry")
             self.dine()
-        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "ms hungry")
+        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "s hungry")
 
     def dine(self):
         # Check left fork
         holdingRight = False
-        holdingLeft = self.leftFork.acquire(False)
+        holdingLeft = self.leftFork.acquire()
         if holdingLeft:
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding left fork")
-            holdingRight = self.rightFork.acquire(False)
+            holdingRight = self.rightFork.acquire()
         if holdingRight:
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding right fork")

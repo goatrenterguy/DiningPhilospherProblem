@@ -4,9 +4,6 @@ import threading
 import time
 
 
-
-
-
 class Philosopher(threading.Thread):
     def __init__(self, waiter, index, prints=False):
         threading.Thread.__init__(self)
@@ -18,14 +15,13 @@ class Philosopher(threading.Thread):
 
     def run(self):
         while self.running:
-            #print("Philosopher " + str(self.index) + " is thinking")
+            # print("Philosopher " + str(self.index) + " is thinking")
             time.sleep(random.random())
             # Gets hungry
-            #print("Philosopher " + str(self.index) + " is hungry")
+            # print("Philosopher " + str(self.index) + " is hungry")
             ate = self.waiter.request(self)
 
-        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "ms hungry")
-
+        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "m hungry")
 
     def dine(self):
         print("Philosopher " + str(self.index) + " is eating")
@@ -35,6 +31,7 @@ class Philosopher(threading.Thread):
         wait = random.random()
         self.hungryTime += wait
         time.sleep(wait)
+
 
 class Waiter:
     def __init__(self):
@@ -55,6 +52,7 @@ class Waiter:
         p.dine()
         self.serving = False
 
+
 def main():
     waiter = Waiter()
     philosophers = [Philosopher(waiter, i) for i in range(5)]
@@ -63,7 +61,6 @@ def main():
     time.sleep(100)
     for p in philosophers:
         p.running = False
-
 
 
 if __name__ == "__main__":
