@@ -28,34 +28,30 @@ class Philosopher(threading.Thread):
 
     def dine(self):
         # Check larger fork
-        if self.leftVal > self.rightVal:
+        if self.leftVal < self.rightVal:
             holdingSmall = False
             holdingBig = False
             start = time.time()
             while not holdingBig:
                 holdingBig = self.leftFork.acquire(False)
-            wait = time.time() - start
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding left fork")
-            start = time.time()
             while not holdingSmall:
                 holdingSmall = self.rightFork.acquire(False)
-            wait = wait + time.time() - start
+            wait = time.time() - start
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding right fork")
-        elif self.rightVal > self.leftVal:
+        elif self.rightVal < self.leftVal:
             holdingSmall = False
             holdingBig = False
             start = time.time()
             while not holdingBig:
                 holdingBig = self.rightFork.acquire(False)
-            wait = time.time() - start
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding right fork")
-            start = time.time()
             while not holdingSmall:
                 holdingSmall = self.leftFork.acquire(False)
-            wait = wait + time.time() - start
+            wait = time.time() - start
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding left fork")
         if self.prints:
