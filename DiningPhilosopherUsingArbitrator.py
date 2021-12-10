@@ -13,20 +13,20 @@ class Philosopher(threading.Thread):
         self.running = True
         self.hungryTime = 0
 
+    # The philosopher, while running, makes requests to the waiter when hungry
     def run(self):
         while self.running:
-            # print("Philosopher " + str(self.index) + " is thinking")
             time.sleep(random.random())
-            # Gets hungry
-            # print("Philosopher " + str(self.index) + " is hungry")
             ate = self.waiter.request(self)
         print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "s hungry")
 
-    def wait(self):
+    # A philosopher given permission can eat
+    def dine(self):
         if self.prints:
             print("Philosopher " + str(self.index) + " is eating")
 
-    def dine(self):
+    # If permission is not granted, the philosopher must wait
+    def wait(self):
         if self.prints:
             print("The waiter is busy, philosopher " + str(self.index) + " will eat when the waiter is ready.")
         wait = random.random()
@@ -39,6 +39,10 @@ class Waiter:
         self.serving = False
         self.requests = []
 
+    # When a request is made to the waiter, if the waiter is not serving
+    # then the philosopher may dine. If the waiter is currently serving,
+    # then the philosopher is added to a queue and must wait until
+    # resources are available.
     def request(self, p: Philosopher):
         if p not in self.requests:
             self.requests.append(p)
