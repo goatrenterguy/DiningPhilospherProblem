@@ -27,11 +27,11 @@ class Philosopher(threading.Thread):
     def dine(self):
         # Check left fork
         holdingRight = False
-        holdingLeft = self.leftFork.acquire()
+        holdingLeft = self.leftFork.acquire(False)
         if holdingLeft:
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding left fork")
-            holdingRight = self.rightFork.acquire()
+            holdingRight = self.rightFork.acquire(False)
         if holdingRight:
             if self.prints:
                 print("Philosopher " + str(self.index) + " is holding right fork")
@@ -58,7 +58,7 @@ def main():
     philosophers = [Philosopher(forks[i % len(forks)], forks[(i + 1) % len(forks)], i) for i in range(len(forks))]
     for p in philosophers:
         p.start()
-    time.sleep(180)
+    time.sleep(10)
     for p in philosophers:
         p.running = False
 

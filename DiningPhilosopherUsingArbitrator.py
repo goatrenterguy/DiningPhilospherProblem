@@ -24,6 +24,7 @@ class Philosopher(threading.Thread):
     def dine(self):
         if self.prints:
             print("Philosopher " + str(self.index) + " is eating")
+        time.sleep(random.random())
 
     # If permission is not granted, the philosopher must wait
     def wait(self):
