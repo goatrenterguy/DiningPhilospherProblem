@@ -20,14 +20,15 @@ class Philosopher(threading.Thread):
             # Gets hungry
             # print("Philosopher " + str(self.index) + " is hungry")
             ate = self.waiter.request(self)
-
-        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "m hungry")
-
-    def dine(self):
-        print("Philosopher " + str(self.index) + " is eating")
+        print("Philosopher " + str(self.index) + " spent " + str(self.hungryTime) + "s hungry")
 
     def wait(self):
-        print("The waiter is busy, philosopher " + str(self.index) + " will eat when the waiter is ready.")
+        if self.prints:
+            print("Philosopher " + str(self.index) + " is eating")
+
+    def dine(self):
+        if self.prints:
+            print("The waiter is busy, philosopher " + str(self.index) + " will eat when the waiter is ready.")
         wait = random.random()
         self.hungryTime += wait
         time.sleep(wait)
