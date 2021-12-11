@@ -4,7 +4,8 @@ import time
 
 
 class Philosopher(threading.Thread):
-    def __init__(self, leftFork: threading.Semaphore, rightFork: threading.Semaphore, leftVal, rightVal, index, prints=False):
+    def __init__(self, leftFork: threading.Semaphore, rightFork: threading.Semaphore, leftVal, rightVal, index,
+                 prints=False):
         threading.Thread.__init__(self)
         self.prints = prints
         self.leftFork = leftFork
@@ -64,13 +65,14 @@ class Philosopher(threading.Thread):
         self.hungryTime += wait
 
 
-
 def main():
     forks = [threading.Semaphore() for i in range(5)]
-    philosophers = [Philosopher(forks[i % len(forks)], forks[(i + 1) % len(forks)], i % len(forks), (i + 1) % len(forks), i) for i in range(len(forks))]
+    philosophers = [
+        Philosopher(forks[i % len(forks)], forks[(i + 1) % len(forks)], i % len(forks), (i + 1) % len(forks), i) for i
+        in range(len(forks))]
     for p in philosophers:
         p.start()
-    time.sleep(10)
+    time.sleep(120)
     for p in philosophers:
         p.running = False
 

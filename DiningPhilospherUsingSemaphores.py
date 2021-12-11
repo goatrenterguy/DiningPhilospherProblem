@@ -39,6 +39,7 @@ class Philosopher(threading.Thread):
             if self.prints:
                 print("Philosopher " + str(self.index) + " is eating")
             time.sleep(random.random())
+            count += 1
             if self.prints:
                 print("Philosopher " + str(self.index) + " put down both forks")
             self.leftFork.release()
@@ -58,9 +59,6 @@ def main():
     philosophers = [Philosopher(forks[i % len(forks)], forks[(i + 1) % len(forks)], i) for i in range(len(forks))]
     for p in philosophers:
         p.start()
-    time.sleep(10)
-    for p in philosophers:
-        p.running = False
 
 
 if __name__ == "__main__":

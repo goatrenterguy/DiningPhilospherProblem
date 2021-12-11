@@ -64,7 +64,7 @@ def main():
     philosophers = [Philosopher(waiter, i) for i in range(5)]
     for p in philosophers:
         p.start()
-    time.sleep(100)
+    time.sleep(120)
     for p in philosophers:
         p.running = False
 
